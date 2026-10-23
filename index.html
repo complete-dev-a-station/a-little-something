@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Happy 30th Birthday</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fff7f3; --ink:#3b2a33; --rose:#e0446a; --rose-soft:#fde1e8;
+    --gold:#f2b138; --card:#ffffff; --muted:#7d6872;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito',system-ui,sans-serif;line-height:1.6}
+  h1,h2{font-family:'Playfair Display',Georgia,serif;margin:0}
+  section{max-width:880px;margin:0 auto;padding:56px 20px}
+  .hero{min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    background:radial-gradient(circle at 20% 20%,#ffe3ea 0,transparent 45%),radial-gradient(circle at 80% 80%,#ffeccb 0,transparent 45%)}
+  .hero .small{letter-spacing:.25em;text-transform:uppercase;font-weight:800;color:var(--rose);font-size:.85rem}
+  .hero h1{font-size:clamp(2.6rem,10vw,5.2rem);line-height:1.05;margin:14px 0}
+  .hero h1 em{color:var(--rose);font-style:italic}
+  .hero p{max-width:520px;color:var(--muted);font-size:1.1rem}
+  button{font:inherit;cursor:pointer}
+  .btn{background:var(--rose);color:#fff;border:0;border-radius:999px;padding:14px 28px;font-weight:800;font-size:1rem;
+    box-shadow:0 8px 20px rgba(224,68,106,.3);transition:transform .15s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--rose);box-shadow:none;border:2px solid var(--rose)}
+  h2{font-size:clamp(1.8rem,6vw,2.6rem);text-align:center;margin-bottom:8px}
+  .sub{text-align:center;color:var(--muted);margin:0 0 32px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+  figure{margin:0;background:var(--card);padding:10px 10px 14px;border-radius:14px;box-shadow:0 8px 24px rgba(59,42,51,.1);
+    transform:rotate(var(--r,0deg));transition:transform .2s}
+  figure:hover{transform:rotate(0) scale(1.03)}
+  figure img,.ph{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:8px;display:block}
+  .ph{background:var(--rose-soft);display:flex;align-items:center;justify-content:center;text-align:center;
+    color:var(--rose);font-weight:700;padding:12px;font-size:.9rem}
+  figcaption{text-align:center;margin-top:10px;font-family:'Playfair Display',serif;font-style:italic;color:var(--muted)}
+  .letter{background:var(--card);border-radius:20px;padding:34px 28px;box-shadow:0 10px 30px rgba(59,42,51,.08);
+    border-top:6px solid var(--rose)}
+  .letter p{margin:0 0 1em;font-size:1.08rem}
+  .letter .sign{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:var(--rose);margin:0}
+  .quiz{background:var(--card);border-radius:20px;padding:30px 24px;box-shadow:0 10px 30px rgba(59,42,51,.08);text-align:center}
+  .qcount{font-weight:800;color:var(--rose);letter-spacing:.15em;font-size:.8rem;text-transform:uppercase}
+  .quiz h3{font-family:'Playfair Display',serif;font-size:1.5rem;margin:8px 0 20px}
+  .opts{display:grid;gap:10px;max-width:520px;margin:0 auto}
+  .opt{background:var(--bg);border:2px solid var(--rose-soft);border-radius:14px;padding:13px 16px;text-align:left;font-weight:600;color:var(--ink);transition:.15s}
+  .opt:hover:not(:disabled){border-color:var(--rose);transform:translateX(3px)}
+  .opt:disabled{cursor:default}
+  .opt.picked{border-color:var(--rose);background:var(--rose-soft)}
+  .fb{margin:22px auto 0;max-width:520px;padding:16px 18px;border-radius:14px;background:#fff3d6;border:2px solid var(--gold);
+    text-align:left;display:none;animation:pop .35s ease}
+  .fb strong{display:block;font-size:1.1rem;margin-bottom:4px}
+  .fb.show{display:block}
+  .next{margin-top:18px;display:none}
+  .next.show{display:inline-block}
+  .result{display:none}
+  .result.show{display:block;animation:pop .4s ease}
+  .score{font-family:'Playfair Display',serif;font-size:4rem;color:var(--rose);margin:0}
+  @keyframes pop{from{opacity:0;transform:scale(.96) translateY(6px)}to{opacity:1;transform:none}}
+  footer{text-align:center;color:var(--muted);padding:40px 20px 60px}
+  canvas{position:fixed;inset:0;pointer-events:none;z-index:10}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+
+<section class="hero">
+  <div class="small">4th November 2026 &middot; a little present</div>
+  <h1>Happy Birthday,<br><em id="herName">you</em> 🎂</h1>
+  <p>I made you something whilst I've been learning Cyber stuff. Scroll down, there's a quiz at the bottom.</p>
+  <p style="margin-top:24px"><button class="btn" id="party">Tap for a surprise 🎉</button></p>
+</section>
+
+<section id="photos">
+  <h2>Us, mostly</h2>
+  <p class="sub">A few of my favourite moments</p>
+  <div class="grid" id="gallery"></div>
+</section>
+
+<section id="message">
+  <h2>A note for you</h2>
+  <p class="sub">&nbsp;</p>
+  <div class="letter" id="letter"></div>
+</section>
+
+<section id="quizsec">
+  <h2>The “Mi(ss)tt Mit-han-thaya” Quiz</h2>
+  <p class="sub">Multiple choice questions. Choose carefully.</p>
+  <div class="quiz">
+    <div id="qbox">
+      <div class="qcount" id="qcount"></div>
+      <h3 id="qtext"></h3>
+      <div class="opts" id="opts"></div>
+      <div class="fb" id="fb"></div>
+      <button class="btn next" id="next">Next question →</button>
+    </div>
+    <div class="result" id="result">
+      <div class="qcount">Final score</div>
+      <p class="score">100%</p>
+      <h3>You got every single one right. 🏆</h3>
+      <p style="color:var(--muted)" id="resultMsg"></p>
+      <button class="btn ghost" id="again">Take it again</button>
+    </div>
+  </div>
+</section>
+
+<footer>What do you know, all this boring IT talk actually made something cool. ❤️</footer>
+
+<script>
+/* ============ EDIT THESE ============ */
+const CONFIG = {
+  name: "Aishwarya",
+  from: "Your most awesomest boyfriend Aaron",
+  // Put your photos in a folder called "photos" next to this file.
+  // Change filenames/captions below. Add or remove rows freely.
+  photos: [
+    { src: "photos/photo1.jpg", caption: "Where it all started" },
+    { src: "photos/photo2.jpg", caption: "My favourite adventure" },
+    { src: "photos/photo3.jpg", caption: "Just us being us" },
+    { src: "photos/photo4.jpg", caption: "That smile" }
+  ],
+  message: [
+    "Happy birthday, my extremely savvy, hilariously funny, super adorable, beautiful little stressball (I know eww gross, emotions). I wanted to give you something thats a bit better than a card... an interactable webpage ;)",
+    "Thank you for being the bestest Mum to Mari and the person who makes my ordinary days better, and who makes any place in the whole wide world (I can say that now) feel like home.",
+    "I hope your day off today is full of ACTUAL chill time for once, and that the years to come are kind to you. I'm so lucky to have you and can't wait to throw our baby into a kennel and travel some more hahaha."
+  ],
+  resultMsg: "Surprise: there were never any wrong answers. Because you're always right - and good boyfriends should just shut up... (your words)"
+};
+
+const quiz = [
+  { q: "How funny are you?",
+    opts: [
+      { t: "Aish is a Comedic Genius", k: "mostwrong" },
+      { t: "A lot", k: "meh" },
+      { t: "I'm not funny, Aaron is actually funnier", k: "right" },
+      { t: "So Damn Funny", k: "meh" } ] },
+  { q: "What's Aish's favourite thing to do?",
+    opts: [
+      { t: "Do Chores", k: "right" },
+      { t: "Get my feet rubbed", k: "meh" },
+      { t: "Eat Bournvita and Nutella at the same time!", k: "mostwrong" },
+      { t: "Win every argument", k: "meh" } ] },
+  { q: "Who is the most important person in your life?",
+    opts: [
+      { t: "Aaron", k: "right" },
+      { t: "Twitch", k: "right" },
+      { t: "Your Friendly Neighbourhood Whiteman", k: "right" },
+      { t: "Mari", k: "mostwrong" } ] },
+  { q: "What is Aish's Dream job?",
+    opts: [
+      { t: "To be the smartest unrated doctor there ever was...", k: "mostwrong" },
+      { t: "A stay at home wife", k: "right" },
+      { t: "A receptionist", k: "meh" },
+      { t: "Anything but a doctor", k: "meh" } ] },
+  { q: "Will I still love you next year, and the year after?",
+    opts: [
+      { t: "Every year, forever", k: "right" },
+      { t: "No, I'm bored already", k: "mostwrong" },
+      { t: "Ask me after dinner", k: "meh" },
+      { t: "Terms and conditions apply", k: "meh" } ] }
+];
+
+const feedback = {
+  mostwrong: [
+    "❌ Wrong!",
+    "That's obviously the correct answer, which makes it wrong. But you're right. 💕"
+  ],
+  right: [
+    "✅ Correct!",
+    "That was the most wrong answer on the page, but you picked it... so it's the right one. You are right. 💕"
+  ],
+  meh: [
+    "❌ Wrong... ✅ and right!",
+    "Technically wrong, emotionally right. Either way: you are right. 💕"
+  ]
+};
+
+/* ============ PAGE LOGIC ============ */
+document.title = "Happy Birthday " + CONFIG.name;
+document.getElementById("herName").textContent = CONFIG.name;
+
+// Gallery
+const gallery = document.getElementById("gallery");
+CONFIG.photos.forEach((p, i) => {
+  const fig = document.createElement("figure");
+  fig.style.setProperty("--r", ((i % 2 ? 1 : -1) * (1 + (i % 3))) + "deg");
+  const img = new Image();
+  img.alt = p.caption; img.loading = "lazy"; img.src = p.src;
+  img.onerror = () => {
+    const ph = document.createElement("div");
+    ph.className = "ph";
+    ph.textContent = "Add " + p.src + " to see your photo here";
+    img.replaceWith(ph);
+  };
+  const cap = document.createElement("figcaption");
+  cap.textContent = p.caption;
+  fig.append(img, cap);
+  gallery.append(fig);
+});
+
+// Letter
+const letter = document.getElementById("letter");
+CONFIG.message.forEach(m => { const p = document.createElement("p"); p.textContent = m; letter.append(p); });
+const sign = document.createElement("p");
+sign.className = "sign"; sign.textContent = "Love From, " + CONFIG.from + " ❤️";
+letter.append(sign);
+
+// Quiz
+let qi = 0;
+const $ = id => document.getElementById(id);
+function renderQ(){
+  const item = quiz[qi];
+  $("qcount").textContent = "Question " + (qi + 1) + " of " + quiz.length;
+  $("qtext").textContent = item.q;
+  $("fb").className = "fb"; $("next").className = "btn next";
+  const box = $("opts"); box.innerHTML = "";
+  item.opts.forEach(o => {
+    const b = document.createElement("button");
+    b.className = "opt"; b.textContent = o.t;
+    b.onclick = () => pick(b, o);
+    box.append(b);
+  });
+}
+function pick(btn, o){
+  document.querySelectorAll(".opt").forEach(x => x.disabled = true);
+  btn.classList.add("picked");
+  const f = feedback[o.k];
+  $("fb").innerHTML = "<strong>" + f[0] + "</strong>" + f[1];
+  $("fb").classList.add("show");
+  $("next").textContent = qi === quiz.length - 1 ? "See my score →" : "Next question →";
+  $("next").classList.add("show");
+  burst(40);
+}
+$("next").onclick = () => {
+  qi++;
+  if (qi >= quiz.length){
+    $("qbox").style.display = "none";
+    $("resultMsg").textContent = CONFIG.resultMsg;
+    $("result").classList.add("show");
+    burst(220);
+  } else renderQ();
+};
+$("again").onclick = () => { qi = 0; $("result").classList.remove("show"); $("qbox").style.display = ""; renderQ(); };
+renderQ();
+
+// Confetti
+const cv = $("confetti"), cx = cv.getContext("2d");
+let parts = [], running = false;
+function size(){ cv.width = innerWidth; cv.height = innerHeight; }
+addEventListener("resize", size); size();
+function burst(n){
+  const colors = ["#e0446a","#f2b138","#ff8fab","#ffd6a5","#b5179e","#4cc9f0"];
+  for (let i = 0; i < n; i++) parts.push({
+    x: innerWidth/2 + (Math.random()-.5)*200, y: innerHeight*0.55,
+    vx: (Math.random()-.5)*12, vy: -Math.random()*13-4,
+    s: Math.random()*7+4, r: Math.random()*6, vr: (Math.random()-.5)*.3,
+    c: colors[(Math.random()*colors.length)|0], life: 0 });
+  if (!running){ running = true; requestAnimationFrame(tick); }
+}
+function tick(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  parts.forEach(p => {
+    p.vy += .32; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life++;
+    cx.save(); cx.translate(p.x,p.y); cx.rotate(p.r);
+    cx.fillStyle = p.c; cx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6); cx.restore();
+  });
+  parts = parts.filter(p => p.y < cv.height + 20 && p.life < 240);
+  if (parts.length) requestAnimationFrame(tick); else { running = false; cx.clearRect(0,0,cv.width,cv.height); }
+}
+$("party").onclick = () => { burst(180); setTimeout(() => $("photos").scrollIntoView({behavior:"smooth"}), 1200); };
+</script>
+</body>
+</html>
