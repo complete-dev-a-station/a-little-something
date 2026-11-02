@@ -87,13 +87,13 @@
 <section class="hero">
   <div class="small">4th November 2026 &middot; a little something something</div>
   <h1>Happy Birthday,<br><em id="herName">you</em> 🎂</h1>
-  <p>I decided to put some of the things I've learned about web development to some use. Scroll down, there's a quiz at the bottom.</p>
+  <p>I decided to put some of the things I'd learnt about web development to some use. Scroll down, there's a quiz at the bottom.</p>
   <p style="margin-top:24px"><button class="btn" id="party">Tap for a surprise 🎉</button></p>
 </section>
 
 <section id="photos">
   <h2>THE BIG THREE ZERO!</h2>
-  <p class="sub">Here are few of my favourite moments with you!</p>
+  <p class="sub">Here are few of my favourite moments of/with you!</p>
   <div class="grid" id="gallery"></div>
 </section>
 
@@ -155,11 +155,13 @@ const CONFIG = {
     { src: "photos/photo18.jpg", caption: "The Bestest Dog Mum" },
   ],
   message: [
-    "Happy birthday, my extremely savvy, hilariously funny, super adorable, beautiful adventurous little stressball (I know eww gross, emotions). I wanted to give you something that's a bit better than a card ... an interactable webpage!",
-    "Thank you for being the bestest Mum to Mari and the person who challenges me to go outside of my normal, someone who I can always rely on for when I am at my lowest, who makes my ordinary days better and uniques, and who makes any place in the whole wide world (I can say that now) feel like a home - home to me is whereever in the world when I am with you!",
+    "NOTE & DISCLAIMER: I have been designing this for weeks, so when my birthday came around - you just had to give such a beautiful photo album 😂 - so the DISCLAIMER for this whole thing is... that this is not a competition! I love your present so so much and I love that I can physically hold it, so I hope you love what I have made for you because you can carry it wherever you go (just try not to lose your phone 😉).",
+    "Happy birthday, my extremely savvy, hilariously funny, super adorable, beautiful adventurous little stressball (I know eww gross, emotions). I wanted to give you something that's a bit better than a card... an interactable webpage!",
+    "Thank you for being the bestest Mum to Mari and the person who challenges me to go outside of my norm, who's not afraid to call me out on things, someone who I can always rely on for when I am at my lowest, someone who makes my ordinary days better and unique, and who makes any place in the whole wide world (I can say that now) feel like a home - because home to me is wherever in the world when I am with you!",
+    "You make me feel like I can go to achieve big things, you are my rock and I truly mean that! You are the most strongest-minded person that I have ever met (sometime too much 😉) but that is such an impressive quality and for it to be bundled with someone so beautiful, I truly am a lucky guy",
     "I hope your day off today is full of ACTUAL chill time for once, and that the years to come are kind to you. I am truly so lucky to have you (I can never seem to say it in words but I can on a webpage) and can't wait to throw our fur baby into a kennel and travel some more hahaha."
   ],
-  resultMsg: "Surprise: there were never any wrong answers. Because you're always right - and good boyfriends should just shut up... (your words)"
+  resultMsg: "Surprise: there were never any wrong answers. Because you're always right - and good boyfriends should just keep their mouth shut... (your words 😉)"
 };
 
 const quiz = [
@@ -172,7 +174,7 @@ const quiz = [
   { q: "What's Aish's favourite thing to do?",
     opts: [
       { t: "Do Chores", k: "right" },
-      { t: "Get my feet rubbed", k: "meh" },
+      { t: "Get her feet rubbed", k: "meh" },
       { t: "Eat Bournvita and Nutella at the same time!", k: "mostwrong" },
       { t: "Win every argument", k: "meh" } ] },
   { q: "Who is the most important person in your life?",
@@ -187,12 +189,48 @@ const quiz = [
       { t: "A stay at home wife", k: "right" },
       { t: "A receptionist", k: "meh" },
       { t: "Anything but a doctor", k: "meh" } ] },
-  { q: "Will I still love you next year, and the year after?",
+  { q: "What do you think Aaron got Aish for her birthday?",
     opts: [
-      { t: "Every year, forever", k: "right" },
-      { t: "No, I'm bored already", k: "mostwrong" },
-      { t: "Ask me after dinner", k: "meh" },
-      { t: "Terms and conditions apply", k: "meh" } ] }
+      { t: "A General Practioner Textbook", k: "meh" },
+      { t: "A broken used Ninja Creami", k: "meh" },
+      { t: "A Ubiquiti Dream Machine for her", k: "right" },
+      { t: "None of the above", k: "mostwrong" } ] },
+  { q: "What is Aish's biggest flaw?",
+    opts: [
+      { t: "Always being late", k: "right" },
+      { t: "Never having clothes to wear", k: "right" },
+      { t: "Breaking everything electrical she comes in contact with", k: "right" },
+      { t: "Being just too perfect of a girlfriend", k: "mostwrong" } ] },
+  { q: "What do you think Aaron's greatest trait is?",
+    opts: [
+      { t: "Being surpisingly clever", k: "meh" },
+      { t: "That he tries...", k: "mostwrong" },
+      { t: "That is so dreamy 🤮", k: "right" },
+      { t: "Being surpisingly driven", k: "meh" } ] },
+  { q: "Try again: What do you think Aaron got you for your birthday?",
+    opts: [
+      { t: "High expectations...", k: "meh" },
+      { t: "just this webpage because he had tunnel vision", k: "meh" },
+      { t: "A lump of coal ", k: "right" },
+      { t: "A photo printer", k: "mostwrong" } ] },
+  { q: "What did Aish want to be when she grew up?",
+    opts: [
+      { t: "A medical professional", k: "meh" },
+      { t: "A Dinosaur, RAWR!! 🦖", k: "right" },
+      { t: "A Dictator", k: "meh" },
+      { t: "A travelling house wife", k: "mostwrong" } ] },
+  { q: "Try again: What do you think Aaron got you for your birthday?",
+    opts: [
+      { t: "A bigger lump of coal", k: "right" },
+      { t: "A virtual version of what I got him", k: "meh" },
+      { t: "Even bigger expectations, since he asked again....", k: "right" },
+      { t: "Tickets to see a man fiddle with some strings attached to some wood....", k: "mostwrong" } ] },
+  { q: "RAWR?",
+    opts: [
+      { t: "rawr 🦕", k: "meh" },
+      { t: "Rawr", k: "meh" },
+      { t: "🦖RAWR🦖", k: "right" },
+      { t: "too much?", k: "mostwrong" } ] }
 ];
 
 const feedback = {
@@ -202,7 +240,7 @@ const feedback = {
   ],
   right: [
     "✅ Correct!",
-    "It's obviously themost wrong answer on the page, and yet you picked it... so I guess it's the right one. You are right. 💕"
+    "It's obviously the most wrong answer on the page, and yet you picked it... so I guess it's the right one. You are right. 💕"
   ],
   meh: [
     "❌ Wrong... ✅ and right!",
